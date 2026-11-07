@@ -1,0 +1,38 @@
+<Page x:Class="GoldenSail.Pages.ClientsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d" d:DesignHeight="600" d:DesignWidth="900" Title="Клиенты">
+    <Grid Background="#f8f4ef">
+        <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+        <Border Background="White" Padding="20,14" BorderBrush="#ddd6cc" BorderThickness="0,0,0,1">
+            <DockPanel LastChildFill="False">
+                <StackPanel DockPanel.Dock="Left">
+                    <TextBlock Text="Клиенты" FontFamily="Times New Roman" FontSize="22" FontWeight="Bold" Foreground="#1a1d29"/>
+                    <TextBlock Text="Контактные данные путешественников" FontFamily="Times New Roman" FontSize="13" Foreground="#77736e" Margin="0,3,0,0"/>
+                </StackPanel>
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBox Name="TbSearch" Width="240" Height="30" Padding="6,3" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="14"
+                             TextChanged="TbSearch_TextChanged" ToolTip="Имя, телефон или email"/>
+                    <Button Content="Обновить" Height="30" Margin="8,0,0,0" Click="BtnRefresh_Click" Background="#6b2737" Foreground="White" BorderBrush="#6b2737"
+                            Padding="12,4" FontFamily="Times New Roman" FontSize="14" Cursor="Hand"/>
+                </StackPanel>
+            </DockPanel>
+        </Border>
+        <Grid Grid.Row="1" Margin="20,16">
+            <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+            <TextBlock Name="TbCount" Text="Загрузка клиентов…" FontFamily="Times New Roman" FontSize="14" Foreground="#5f5a54" Margin="0,0,0,10"/>
+            <DataGrid Grid.Row="1" Name="DgClients" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" HeadersVisibility="Column"
+                      GridLinesVisibility="Horizontal" RowHeight="42" ColumnHeaderHeight="38" BorderBrush="#ddd6cc" BorderThickness="1"
+                      Background="White" Foreground="#292b31" FontFamily="Times New Roman" FontSize="14" HorizontalGridLinesBrush="#eeeae4">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ФИО" Binding="{Binding Name}" Width="*" MinWidth="200"/>
+                    <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}" Width="170"/>
+                    <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*" MinWidth="180"/>
+                    <DataGridTextColumn Header="Паспорт" Binding="{Binding Passport}" Width="150"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</Page>

@@ -1,0 +1,45 @@
+<Page x:Class="GoldenSail.Pages.TourDetailPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d" d:DesignHeight="600" d:DesignWidth="900" Title="Подробнее о туре">
+    <Grid Background="#f8f4ef">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" PanningMode="VerticalOnly">
+            <StackPanel Margin="28,16,28,30" MaxWidth="1050" HorizontalAlignment="Center">
+                <Button Content="←  Назад к каталогу" Name="BtnBack" Click="BtnBack_Click" HorizontalAlignment="Left"
+                        Background="Transparent" Foreground="#6b2737" BorderThickness="0" FontFamily="Times New Roman" FontSize="15" Padding="4,7" Margin="0,0,0,10" Cursor="Hand"/>
+                <Border Background="White" BorderBrush="#ddd6cc" BorderThickness="1">
+                    <Grid>
+                        <Grid.ColumnDefinitions><ColumnDefinition Width="1.1*"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                        <Image Name="ImgTour" Grid.Column="0" Height="320" Stretch="UniformToFill"/>
+                        <StackPanel Grid.Column="1" Margin="24" VerticalAlignment="Center">
+                            <TextBlock Name="TbStrana" FontFamily="Times New Roman" FontSize="15" Foreground="#8b6f47"/>
+                            <TextBlock Name="TbNazvanie" FontFamily="Times New Roman" FontSize="27" FontWeight="Bold" Foreground="#1a1d29" TextWrapping="Wrap" Margin="0,7,0,5"/>
+                            <TextBlock Name="TbOtel" FontFamily="Times New Roman" FontSize="15" Foreground="#77736e" TextWrapping="Wrap"/>
+                            <Border Name="BadgeBorder" Background="#f2e7e4" Padding="8,4" HorizontalAlignment="Left" Margin="0,14,0,0">
+                                <TextBlock Text="Горящий тур" FontFamily="Times New Roman" FontSize="13" Foreground="#6b2737" FontWeight="Bold"/>
+                            </Border>
+                            <TextBlock Name="TbTsena" FontFamily="Times New Roman" FontSize="24" FontWeight="Bold" Foreground="#6b2737" Margin="0,16,0,0"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Grid Margin="0,14,0,0">
+                    <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="240"/></Grid.ColumnDefinitions>
+                    <Border Grid.Column="0" Background="White" BorderBrush="#ddd6cc" BorderThickness="1" Padding="20" Margin="0,0,14,0">
+                        <StackPanel><TextBlock Text="Описание тура" FontFamily="Times New Roman" FontSize="19" FontWeight="Bold" Foreground="#1a1d29" Margin="0,0,0,10"/>
+                            <TextBlock Name="TbOpisanie" FontFamily="Times New Roman" FontSize="15" Foreground="#333333" TextWrapping="Wrap" LineHeight="23"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Name="QrBorder" Grid.Column="1" Background="White" BorderBrush="#ddd6cc" BorderThickness="1" Padding="16">
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Text="Видео о поездке" FontFamily="Times New Roman" FontSize="16" FontWeight="Bold" Foreground="#1a1d29" TextWrapping="Wrap" TextAlignment="Center"/>
+                            <TextBlock Text="Откройте камерой телефона" FontFamily="Times New Roman" FontSize="13" Foreground="#77736e" TextWrapping="Wrap" TextAlignment="Center" Margin="0,6,0,10"/>
+                            <Image Name="ImgQrCode" Width="170" Height="170"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

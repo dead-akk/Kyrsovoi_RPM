@@ -1,0 +1,49 @@
+<!-- Страница списка бронирований с поиском, фильтрацией и данными из базы. -->
+<Page x:Class="GoldenSail.Pages.BookingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d" d:DesignHeight="600" d:DesignWidth="900" Title="Бронирования">
+    <Grid Background="#f8f4ef">
+        <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+        <Border Background="White" Padding="20,14" BorderBrush="#ddd6cc" BorderThickness="0,0,0,1">
+            <DockPanel LastChildFill="False">
+                <StackPanel DockPanel.Dock="Left" VerticalAlignment="Center">
+                    <TextBlock Text="Бронирования" FontFamily="Times New Roman" FontSize="22" FontWeight="Bold" Foreground="#1a1d29"/>
+                    <TextBlock Text="Список заказов и их текущий статус" FontFamily="Times New Roman" FontSize="13" Foreground="#77736e" Margin="0,3,0,0"/>
+                </StackPanel>
+                <WrapPanel DockPanel.Dock="Right" VerticalAlignment="Center" HorizontalAlignment="Right">
+                    <TextBox Name="TBoxSearch" Width="220" Height="30" Padding="6,3" VerticalContentAlignment="Center" Margin="0,0,8,0"
+                             FontFamily="Times New Roman" FontSize="14" TextChanged="TBoxSearch_TextChanged" ToolTip="Номер, клиент, тур или сотрудник"/>
+                    <ComboBox Name="ComboStatus" Width="145" Height="30" Margin="0,0,8,0" FontFamily="Times New Roman" FontSize="14"
+                              SelectionChanged="ComboStatus_SelectionChanged">
+                        <ComboBoxItem Content="Все статусы" IsSelected="True"/>
+                        <ComboBoxItem Content="Неоплачено"/><ComboBoxItem Content="Не оплачено"/><ComboBoxItem Content="Оплачено"/>
+                        <ComboBoxItem Content="Завершено"/><ComboBoxItem Content="Отменено"/>
+                    </ComboBox>
+                    <Button Content="Обновить" Height="30" Click="BtnRefresh_Click" Background="#6b2737" Foreground="White" BorderBrush="#6b2737"
+                            Padding="12,4" FontFamily="Times New Roman" FontSize="14" Cursor="Hand"/>
+                </WrapPanel>
+            </DockPanel>
+        </Border>
+        <Grid Grid.Row="1" Margin="20,16">
+            <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+            <TextBlock Name="TbCount" Text="Загрузка бронирований…" FontFamily="Times New Roman" FontSize="14" Foreground="#5f5a54" Margin="0,0,0,10"/>
+            <DataGrid Grid.Row="1" Name="DgBookings" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" HeadersVisibility="Column"
+                      GridLinesVisibility="Horizontal" RowHeight="42" ColumnHeaderHeight="38" BorderBrush="#ddd6cc" BorderThickness="1"
+                      Background="White" Foreground="#292b31" FontFamily="Times New Roman" FontSize="14" HorizontalGridLinesBrush="#eeeae4"
+                      VerticalGridLinesBrush="#f4f1ed" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="№" Binding="{Binding Number}" Width="55"/>
+                    <DataGridTextColumn Header="Тур" Binding="{Binding Tour}" Width="*" MinWidth="150"/>
+                    <DataGridTextColumn Header="Клиент" Binding="{Binding Client}" Width="*" MinWidth="150"/>
+                    <DataGridTextColumn Header="Сотрудник" Binding="{Binding Employee}" Width="*" MinWidth="130"/>
+                    <DataGridTextColumn Header="Дата" Binding="{Binding Date, StringFormat={}{0:dd.MM.yyyy}}" Width="105"/>
+                    <DataGridTextColumn Header="Сумма" Binding="{Binding Amount, StringFormat={}{0:N0} ₽}" Width="120"/>
+                    <DataGridTextColumn Header="Статус" Binding="{Binding Status}" Width="125"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</Page>

@@ -1,0 +1,735 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище GoldenSailModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bronirovaniya">
+          <Key>
+            <PropertyRef Name="ID_Broni" />
+          </Key>
+          <Property Name="ID_Broni" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Tyra" Type="int" Nullable="false" />
+          <Property Name="ID_Klienta" Type="int" Nullable="false" />
+          <Property Name="ID_Sotrudnika" Type="int" Nullable="false" />
+          <Property Name="DataBroni" Type="datetime" Nullable="false" />
+          <Property Name="StatusBroni" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ItogStoimost" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BronUslugi">
+          <Key>
+            <PropertyRef Name="ID_Broni" />
+            <PropertyRef Name="ID_Uslugi" />
+          </Key>
+          <Property Name="ID_Broni" Type="int" Nullable="false" />
+          <Property Name="ID_Uslugi" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DopUslugi">
+          <Key>
+            <PropertyRef Name="ID_Uslugi" />
+          </Key>
+          <Property Name="ID_Uslugi" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazvanie" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Tsena" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="IstoriyaDeystviy">
+          <Key>
+            <PropertyRef Name="ID_Loga" />
+          </Key>
+          <Property Name="ID_Loga" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Sotrudnika" Type="int" Nullable="false" />
+          <Property Name="TipDeystviya" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NazvanieSyishnosti" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ID_Syishnosti" Type="int" Nullable="false" />
+          <Property Name="DataVremya" Type="datetime" Nullable="false" />
+          <Property Name="Opisanie" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Klienti">
+          <Key>
+            <PropertyRef Name="ID_Klienta" />
+          </Key>
+          <Property Name="ID_Klienta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Familiya" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Imya" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Otchestvo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SeriyaPasporta" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NomerPasporta" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telefon" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Oplati">
+          <Key>
+            <PropertyRef Name="ID_Oplati" />
+          </Key>
+          <Property Name="ID_Oplati" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Broni" Type="int" Nullable="false" />
+          <Property Name="Symma" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="DataOplati" Type="datetime" Nullable="false" />
+          <Property Name="SposobOplati" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roli">
+          <Key>
+            <PropertyRef Name="ID_Roli" />
+          </Key>
+          <Property Name="ID_Roli" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazvanie" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sotrudniki">
+          <Key>
+            <PropertyRef Name="ID_Sotrudnika" />
+          </Key>
+          <Property Name="ID_Sotrudnika" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Familiya" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Imya" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Otchestvo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telefon" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Parol" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="ID_Roli" Type="int" Nullable="false" />
+          <Property Name="IsPodtverzhden" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Tyri">
+          <Key>
+            <PropertyRef Name="ID_Tyra" />
+          </Key>
+          <Property Name="ID_Tyra" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazvanie" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Strana" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Otel" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Opisanie" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Tsena" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="IsGoryashiy" Type="bit" Nullable="false" />
+          <Property Name="IsUdalen" Type="bit" Nullable="false" />
+          <Property Name="Video" Type="nvarchar(max)" />
+          <Property Name="Foto" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_Bron_Klienti">
+          <End Role="Klienti" Type="Self.Klienti" Multiplicity="1" />
+          <End Role="Bronirovaniya" Type="Self.Bronirovaniya" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Klienti">
+              <PropertyRef Name="ID_Klienta" />
+            </Principal>
+            <Dependent Role="Bronirovaniya">
+              <PropertyRef Name="ID_Klienta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bron_Sotrudniki">
+          <End Role="Sotrudniki" Type="Self.Sotrudniki" Multiplicity="1" />
+          <End Role="Bronirovaniya" Type="Self.Bronirovaniya" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sotrudniki">
+              <PropertyRef Name="ID_Sotrudnika" />
+            </Principal>
+            <Dependent Role="Bronirovaniya">
+              <PropertyRef Name="ID_Sotrudnika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bron_Tyri">
+          <End Role="Tyri" Type="Self.Tyri" Multiplicity="1" />
+          <End Role="Bronirovaniya" Type="Self.Bronirovaniya" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tyri">
+              <PropertyRef Name="ID_Tyra" />
+            </Principal>
+            <Dependent Role="Bronirovaniya">
+              <PropertyRef Name="ID_Tyra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BU_Bron">
+          <End Role="Bronirovaniya" Type="Self.Bronirovaniya" Multiplicity="1" />
+          <End Role="BronUslugi" Type="Self.BronUslugi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bronirovaniya">
+              <PropertyRef Name="ID_Broni" />
+            </Principal>
+            <Dependent Role="BronUslugi">
+              <PropertyRef Name="ID_Broni" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BU_Uslugi">
+          <End Role="DopUslugi" Type="Self.DopUslugi" Multiplicity="1" />
+          <End Role="BronUslugi" Type="Self.BronUslugi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DopUslugi">
+              <PropertyRef Name="ID_Uslugi" />
+            </Principal>
+            <Dependent Role="BronUslugi">
+              <PropertyRef Name="ID_Uslugi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Istoriya_Sotrudniki">
+          <End Role="Sotrudniki" Type="Self.Sotrudniki" Multiplicity="1" />
+          <End Role="IstoriyaDeystviy" Type="Self.IstoriyaDeystviy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sotrudniki">
+              <PropertyRef Name="ID_Sotrudnika" />
+            </Principal>
+            <Dependent Role="IstoriyaDeystviy">
+              <PropertyRef Name="ID_Sotrudnika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Oplati_Bron">
+          <End Role="Bronirovaniya" Type="Self.Bronirovaniya" Multiplicity="1" />
+          <End Role="Oplati" Type="Self.Oplati" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bronirovaniya">
+              <PropertyRef Name="ID_Broni" />
+            </Principal>
+            <Dependent Role="Oplati">
+              <PropertyRef Name="ID_Broni" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sotrudniki_Roli">
+          <End Role="Roli" Type="Self.Roli" Multiplicity="1" />
+          <End Role="Sotrudniki" Type="Self.Sotrudniki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roli">
+              <PropertyRef Name="ID_Roli" />
+            </Principal>
+            <Dependent Role="Sotrudniki">
+              <PropertyRef Name="ID_Roli" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="Хранилище GoldenSailModelContainer">
+          <EntitySet Name="Bronirovaniya" EntityType="Self.Bronirovaniya" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BronUslugi" EntityType="Self.BronUslugi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DopUslugi" EntityType="Self.DopUslugi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IstoriyaDeystviy" EntityType="Self.IstoriyaDeystviy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Klienti" EntityType="Self.Klienti" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Oplati" EntityType="Self.Oplati" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roli" EntityType="Self.Roli" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sotrudniki" EntityType="Self.Sotrudniki" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tyri" EntityType="Self.Tyri" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Bron_Klienti" Association="Self.FK_Bron_Klienti">
+            <End Role="Klienti" EntitySet="Klienti" />
+            <End Role="Bronirovaniya" EntitySet="Bronirovaniya" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bron_Sotrudniki" Association="Self.FK_Bron_Sotrudniki">
+            <End Role="Sotrudniki" EntitySet="Sotrudniki" />
+            <End Role="Bronirovaniya" EntitySet="Bronirovaniya" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bron_Tyri" Association="Self.FK_Bron_Tyri">
+            <End Role="Tyri" EntitySet="Tyri" />
+            <End Role="Bronirovaniya" EntitySet="Bronirovaniya" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BU_Bron" Association="Self.FK_BU_Bron">
+            <End Role="Bronirovaniya" EntitySet="Bronirovaniya" />
+            <End Role="BronUslugi" EntitySet="BronUslugi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BU_Uslugi" Association="Self.FK_BU_Uslugi">
+            <End Role="DopUslugi" EntitySet="DopUslugi" />
+            <End Role="BronUslugi" EntitySet="BronUslugi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Istoriya_Sotrudniki" Association="Self.FK_Istoriya_Sotrudniki">
+            <End Role="Sotrudniki" EntitySet="Sotrudniki" />
+            <End Role="IstoriyaDeystviy" EntitySet="IstoriyaDeystviy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Oplati_Bron" Association="Self.FK_Oplati_Bron">
+            <End Role="Bronirovaniya" EntitySet="Bronirovaniya" />
+            <End Role="Oplati" EntitySet="Oplati" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sotrudniki_Roli" Association="Self.FK_Sotrudniki_Roli">
+            <End Role="Roli" EntitySet="Roli" />
+            <End Role="Sotrudniki" EntitySet="Sotrudniki" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GoldenSailModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Bronirovaniya">
+          <Key>
+            <PropertyRef Name="ID_Broni" />
+          </Key>
+          <Property Name="ID_Broni" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Tyra" Type="Int32" Nullable="false" />
+          <Property Name="ID_Klienta" Type="Int32" Nullable="false" />
+          <Property Name="ID_Sotrudnika" Type="Int32" Nullable="false" />
+          <Property Name="DataBroni" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="StatusBroni" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ItogStoimost" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Klienti" Relationship="Self.FK_Bron_Klienti" FromRole="Bronirovaniya" ToRole="Klienti" />
+          <NavigationProperty Name="Sotrudniki" Relationship="Self.FK_Bron_Sotrudniki" FromRole="Bronirovaniya" ToRole="Sotrudniki" />
+          <NavigationProperty Name="Tyri" Relationship="Self.FK_Bron_Tyri" FromRole="Bronirovaniya" ToRole="Tyri" />
+          <NavigationProperty Name="Oplati" Relationship="Self.FK_Oplati_Bron" FromRole="Bronirovaniya" ToRole="Oplati" />
+          <NavigationProperty Name="DopUslugi" Relationship="Self.BronUslugi" FromRole="Bronirovaniya" ToRole="DopUslugi" />
+        </EntityType>
+        <EntityType Name="DopUslugi">
+          <Key>
+            <PropertyRef Name="ID_Uslugi" />
+          </Key>
+          <Property Name="ID_Uslugi" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazvanie" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Tsena" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Bronirovaniya" Relationship="Self.BronUslugi" FromRole="DopUslugi" ToRole="Bronirovaniya" />
+        </EntityType>
+        <EntityType Name="IstoriyaDeystviy">
+          <Key>
+            <PropertyRef Name="ID_Loga" />
+          </Key>
+          <Property Name="ID_Loga" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Sotrudnika" Type="Int32" Nullable="false" />
+          <Property Name="TipDeystviya" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NazvanieSyishnosti" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ID_Syishnosti" Type="Int32" Nullable="false" />
+          <Property Name="DataVremya" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Opisanie" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Sotrudniki" Relationship="Self.FK_Istoriya_Sotrudniki" FromRole="IstoriyaDeystviy" ToRole="Sotrudniki" />
+        </EntityType>
+        <EntityType Name="Klienti">
+          <Key>
+            <PropertyRef Name="ID_Klienta" />
+          </Key>
+          <Property Name="ID_Klienta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Familiya" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Imya" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Otchestvo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SeriyaPasporta" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NomerPasporta" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Telefon" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Bronirovaniya" Relationship="Self.FK_Bron_Klienti" FromRole="Klienti" ToRole="Bronirovaniya" />
+        </EntityType>
+        <EntityType Name="Oplati">
+          <Key>
+            <PropertyRef Name="ID_Oplati" />
+          </Key>
+          <Property Name="ID_Oplati" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Broni" Type="Int32" Nullable="false" />
+          <Property Name="Symma" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="DataOplati" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SposobOplati" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Bronirovaniya" Relationship="Self.FK_Oplati_Bron" FromRole="Oplati" ToRole="Bronirovaniya" />
+        </EntityType>
+        <EntityType Name="Roli">
+          <Key>
+            <PropertyRef Name="ID_Roli" />
+          </Key>
+          <Property Name="ID_Roli" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazvanie" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Sotrudniki" Relationship="Self.FK_Sotrudniki_Roli" FromRole="Roli" ToRole="Sotrudniki" />
+        </EntityType>
+        <EntityType Name="Sotrudniki">
+          <Key>
+            <PropertyRef Name="ID_Sotrudnika" />
+          </Key>
+          <Property Name="ID_Sotrudnika" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Familiya" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Imya" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Otchestvo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Telefon" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Parol" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ID_Roli" Type="Int32" Nullable="false" />
+          <Property Name="IsPodtverzhden" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Bronirovaniya" Relationship="Self.FK_Bron_Sotrudniki" FromRole="Sotrudniki" ToRole="Bronirovaniya" />
+          <NavigationProperty Name="IstoriyaDeystviy" Relationship="Self.FK_Istoriya_Sotrudniki" FromRole="Sotrudniki" ToRole="IstoriyaDeystviy" />
+          <NavigationProperty Name="Roli" Relationship="Self.FK_Sotrudniki_Roli" FromRole="Sotrudniki" ToRole="Roli" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Tyri">
+          <Key>
+            <PropertyRef Name="ID_Tyra" />
+          </Key>
+          <Property Name="ID_Tyra" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazvanie" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Strana" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Otel" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Opisanie" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Tsena" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="IsGoryashiy" Type="Boolean" Nullable="false" />
+          <Property Name="IsUdalen" Type="Boolean" Nullable="false" />
+          <Property Name="Video" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Foto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Bronirovaniya" Relationship="Self.FK_Bron_Tyri" FromRole="Tyri" ToRole="Bronirovaniya" />
+        </EntityType>
+        <Association Name="FK_Bron_Klienti">
+          <End Role="Klienti" Type="Self.Klienti" Multiplicity="1" />
+          <End Role="Bronirovaniya" Type="Self.Bronirovaniya" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Klienti">
+              <PropertyRef Name="ID_Klienta" />
+            </Principal>
+            <Dependent Role="Bronirovaniya">
+              <PropertyRef Name="ID_Klienta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bron_Sotrudniki">
+          <End Role="Sotrudniki" Type="Self.Sotrudniki" Multiplicity="1" />
+          <End Role="Bronirovaniya" Type="Self.Bronirovaniya" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sotrudniki">
+              <PropertyRef Name="ID_Sotrudnika" />
+            </Principal>
+            <Dependent Role="Bronirovaniya">
+              <PropertyRef Name="ID_Sotrudnika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bron_Tyri">
+          <End Role="Tyri" Type="Self.Tyri" Multiplicity="1" />
+          <End Role="Bronirovaniya" Type="Self.Bronirovaniya" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tyri">
+              <PropertyRef Name="ID_Tyra" />
+            </Principal>
+            <Dependent Role="Bronirovaniya">
+              <PropertyRef Name="ID_Tyra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Oplati_Bron">
+          <End Role="Bronirovaniya" Type="Self.Bronirovaniya" Multiplicity="1" />
+          <End Role="Oplati" Type="Self.Oplati" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bronirovaniya">
+              <PropertyRef Name="ID_Broni" />
+            </Principal>
+            <Dependent Role="Oplati">
+              <PropertyRef Name="ID_Broni" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Istoriya_Sotrudniki">
+          <End Role="Sotrudniki" Type="Self.Sotrudniki" Multiplicity="1" />
+          <End Role="IstoriyaDeystviy" Type="Self.IstoriyaDeystviy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sotrudniki">
+              <PropertyRef Name="ID_Sotrudnika" />
+            </Principal>
+            <Dependent Role="IstoriyaDeystviy">
+              <PropertyRef Name="ID_Sotrudnika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sotrudniki_Roli">
+          <End Role="Roli" Type="Self.Roli" Multiplicity="1" />
+          <End Role="Sotrudniki" Type="Self.Sotrudniki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roli">
+              <PropertyRef Name="ID_Roli" />
+            </Principal>
+            <Dependent Role="Sotrudniki">
+              <PropertyRef Name="ID_Roli" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BronUslugi">
+          <End Role="Bronirovaniya" Type="Self.Bronirovaniya" Multiplicity="*" />
+          <End Role="DopUslugi" Type="Self.DopUslugi" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="GoldenSailEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bronirovaniya" EntityType="Self.Bronirovaniya" />
+          <EntitySet Name="DopUslugi" EntityType="Self.DopUslugi" />
+          <EntitySet Name="IstoriyaDeystviy" EntityType="Self.IstoriyaDeystviy" />
+          <EntitySet Name="Klienti" EntityType="Self.Klienti" />
+          <EntitySet Name="Oplati" EntityType="Self.Oplati" />
+          <EntitySet Name="Roli" EntityType="Self.Roli" />
+          <EntitySet Name="Sotrudniki" EntityType="Self.Sotrudniki" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Tyri" EntityType="Self.Tyri" />
+          <AssociationSet Name="FK_Bron_Klienti" Association="Self.FK_Bron_Klienti">
+            <End Role="Klienti" EntitySet="Klienti" />
+            <End Role="Bronirovaniya" EntitySet="Bronirovaniya" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bron_Sotrudniki" Association="Self.FK_Bron_Sotrudniki">
+            <End Role="Sotrudniki" EntitySet="Sotrudniki" />
+            <End Role="Bronirovaniya" EntitySet="Bronirovaniya" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bron_Tyri" Association="Self.FK_Bron_Tyri">
+            <End Role="Tyri" EntitySet="Tyri" />
+            <End Role="Bronirovaniya" EntitySet="Bronirovaniya" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Oplati_Bron" Association="Self.FK_Oplati_Bron">
+            <End Role="Bronirovaniya" EntitySet="Bronirovaniya" />
+            <End Role="Oplati" EntitySet="Oplati" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Istoriya_Sotrudniki" Association="Self.FK_Istoriya_Sotrudniki">
+            <End Role="Sotrudniki" EntitySet="Sotrudniki" />
+            <End Role="IstoriyaDeystviy" EntitySet="IstoriyaDeystviy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sotrudniki_Roli" Association="Self.FK_Sotrudniki_Roli">
+            <End Role="Roli" EntitySet="Roli" />
+            <End Role="Sotrudniki" EntitySet="Sotrudniki" />
+          </AssociationSet>
+          <AssociationSet Name="BronUslugi" Association="Self.BronUslugi">
+            <End Role="Bronirovaniya" EntitySet="Bronirovaniya" />
+            <End Role="DopUslugi" EntitySet="DopUslugi" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(GoldenSailModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(GoldenSailModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+        </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище GoldenSailModelContainer" CdmEntityContainer="GoldenSailEntities">
+          <EntitySetMapping Name="Bronirovaniya">
+            <EntityTypeMapping TypeName="GoldenSailModel.Bronirovaniya">
+              <MappingFragment StoreEntitySet="Bronirovaniya">
+                <ScalarProperty Name="ID_Broni" ColumnName="ID_Broni" />
+                <ScalarProperty Name="ID_Tyra" ColumnName="ID_Tyra" />
+                <ScalarProperty Name="ID_Klienta" ColumnName="ID_Klienta" />
+                <ScalarProperty Name="ID_Sotrudnika" ColumnName="ID_Sotrudnika" />
+                <ScalarProperty Name="DataBroni" ColumnName="DataBroni" />
+                <ScalarProperty Name="StatusBroni" ColumnName="StatusBroni" />
+                <ScalarProperty Name="ItogStoimost" ColumnName="ItogStoimost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DopUslugi">
+            <EntityTypeMapping TypeName="GoldenSailModel.DopUslugi">
+              <MappingFragment StoreEntitySet="DopUslugi">
+                <ScalarProperty Name="ID_Uslugi" ColumnName="ID_Uslugi" />
+                <ScalarProperty Name="Nazvanie" ColumnName="Nazvanie" />
+                <ScalarProperty Name="Tsena" ColumnName="Tsena" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IstoriyaDeystviy">
+            <EntityTypeMapping TypeName="GoldenSailModel.IstoriyaDeystviy">
+              <MappingFragment StoreEntitySet="IstoriyaDeystviy">
+                <ScalarProperty Name="ID_Loga" ColumnName="ID_Loga" />
+                <ScalarProperty Name="ID_Sotrudnika" ColumnName="ID_Sotrudnika" />
+                <ScalarProperty Name="TipDeystviya" ColumnName="TipDeystviya" />
+                <ScalarProperty Name="NazvanieSyishnosti" ColumnName="NazvanieSyishnosti" />
+                <ScalarProperty Name="ID_Syishnosti" ColumnName="ID_Syishnosti" />
+                <ScalarProperty Name="DataVremya" ColumnName="DataVremya" />
+                <ScalarProperty Name="Opisanie" ColumnName="Opisanie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Klienti">
+            <EntityTypeMapping TypeName="GoldenSailModel.Klienti">
+              <MappingFragment StoreEntitySet="Klienti">
+                <ScalarProperty Name="ID_Klienta" ColumnName="ID_Klienta" />
+                <ScalarProperty Name="Familiya" ColumnName="Familiya" />
+                <ScalarProperty Name="Imya" ColumnName="Imya" />
+                <ScalarProperty Name="Otchestvo" ColumnName="Otchestvo" />
+                <ScalarProperty Name="SeriyaPasporta" ColumnName="SeriyaPasporta" />
+                <ScalarProperty Name="NomerPasporta" ColumnName="NomerPasporta" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Oplati">
+            <EntityTypeMapping TypeName="GoldenSailModel.Oplati">
+              <MappingFragment StoreEntitySet="Oplati">
+                <ScalarProperty Name="ID_Oplati" ColumnName="ID_Oplati" />
+                <ScalarProperty Name="ID_Broni" ColumnName="ID_Broni" />
+                <ScalarProperty Name="Symma" ColumnName="Symma" />
+                <ScalarProperty Name="DataOplati" ColumnName="DataOplati" />
+                <ScalarProperty Name="SposobOplati" ColumnName="SposobOplati" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roli">
+            <EntityTypeMapping TypeName="GoldenSailModel.Roli">
+              <MappingFragment StoreEntitySet="Roli">
+                <ScalarProperty Name="ID_Roli" ColumnName="ID_Roli" />
+                <ScalarProperty Name="Nazvanie" ColumnName="Nazvanie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sotrudniki">
+            <EntityTypeMapping TypeName="GoldenSailModel.Sotrudniki">
+              <MappingFragment StoreEntitySet="Sotrudniki">
+                <ScalarProperty Name="ID_Sotrudnika" ColumnName="ID_Sotrudnika" />
+                <ScalarProperty Name="Familiya" ColumnName="Familiya" />
+                <ScalarProperty Name="Imya" ColumnName="Imya" />
+                <ScalarProperty Name="Otchestvo" ColumnName="Otchestvo" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Parol" ColumnName="Parol" />
+                <ScalarProperty Name="ID_Roli" ColumnName="ID_Roli" />
+                <ScalarProperty Name="IsPodtverzhden" ColumnName="IsPodtverzhden" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="GoldenSailModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tyri">
+            <EntityTypeMapping TypeName="GoldenSailModel.Tyri">
+              <MappingFragment StoreEntitySet="Tyri">
+                <ScalarProperty Name="ID_Tyra" ColumnName="ID_Tyra" />
+                <ScalarProperty Name="Nazvanie" ColumnName="Nazvanie" />
+                <ScalarProperty Name="Strana" ColumnName="Strana" />
+                <ScalarProperty Name="Otel" ColumnName="Otel" />
+                <ScalarProperty Name="Opisanie" ColumnName="Opisanie" />
+                <ScalarProperty Name="Tsena" ColumnName="Tsena" />
+                <ScalarProperty Name="IsGoryashiy" ColumnName="IsGoryashiy" />
+                <ScalarProperty Name="IsUdalen" ColumnName="IsUdalen" />
+                <ScalarProperty Name="Video" ColumnName="Video" />
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="BronUslugi" TypeName="GoldenSailModel.BronUslugi" StoreEntitySet="BronUslugi">
+            <EndProperty Name="Bronirovaniya">
+              <ScalarProperty Name="ID_Broni" ColumnName="ID_Broni" />
+            </EndProperty>
+            <EndProperty Name="DopUslugi">
+              <ScalarProperty Name="ID_Uslugi" ColumnName="ID_Uslugi" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Хранилище GoldenSailModel.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Хранилище GoldenSailModel.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Хранилище GoldenSailModel.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Хранилище GoldenSailModel.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GoldenSailModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Хранилище GoldenSailModel.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GoldenSailModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище GoldenSailModel.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище GoldenSailModel.sp_upgraddiagrams" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
